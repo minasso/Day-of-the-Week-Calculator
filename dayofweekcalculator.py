@@ -27,12 +27,27 @@ def century(year):
         anchor = 0
     else:
         print('Error: Year must be between 1800 and 2199')
+    print('Anchor: ' + str(anchor))
     return(anchor)
 
+
+
+def isleapyear(year,y):
+    if y%4 ==0:
+        isleap== True
+    else
+        isleap== False
+
+
+
+
+        
 def year_(y, anchor):
     doomsday= (( y//12 + y%12 + (y%12)//4 ) % 7  + anchor )%7
+    print('Doomsday: ' +str(doomsday))
     return(doomsday)
-
+   
+#so far, we have a number that corresponds to the century and then the year. 
 
 # 1/3, 2/28, 3/0, 4/4, 5/9, 6/6, 7/11, 8/8, 9/5, 10/10, 11/7, 12/12
 
@@ -46,7 +61,9 @@ def day_sub(month):
     l2 = [4,0,0,3,5,1,3,6,2,4,0,2]
     d = dict(zip(l1,l2))
     n = d[month]
+    print('month contibution: '+ str(n))
     return(n)
+
 
 
 def day_of_week(integer):
@@ -76,11 +93,11 @@ d4='11/30/1983'
 main()
 
 
+#output the anchor, 
 
 
 
-
-
+#code in leap year
 
 
 
@@ -88,3 +105,4 @@ main()
 # run month subroutine
 # run day subroutine
 # output answer
+# want to add in an option for long format which gives you the doomsday for the given year
