@@ -80,7 +80,7 @@ def main():
     n = day_sub(int(month))
     total = (doomsday +n + int(day))%7
     if int(y)%4==0:
-        if month ==2 or 3:
+        if month ==2 or 1:  #just changed to 1 from 3
             total = total-1
     day_ = day_of_week(total)
     print(day_)
