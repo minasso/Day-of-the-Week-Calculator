@@ -1,5 +1,5 @@
 import re
-
+from leap import isleap
 
 def user_input():
     date = input('Enter a date between 1/1/1800 and 12/31/2199:    ')
@@ -30,13 +30,6 @@ def century(year):
     print('Anchor: ' + str(anchor))
     return(anchor)
 
-
-
-def isleapyear(year,y):
-    if y%4 ==0:
-        isleap== True
-    else
-        isleap== False
 
 
 
@@ -79,7 +72,7 @@ def main():
     doomsday = int(year_(int(y), int(anchor)))
     n = day_sub(int(month))
     total = (doomsday +n + int(day))%7
-    if int(y)%4==0:
+    if isleap(year)==True:  #changed to include isleap module instead of just divisible by 4
         if month ==2 or 1:  #just changed to 1 from 3
             total = total-1
     day_ = day_of_week(total)
