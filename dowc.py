@@ -6,14 +6,9 @@ import re
 parser = argparse.ArgumentParser(description= 'Pass in date in cmd line')
 parser.add_argument('-d', '--date', metavar='', type=str, help= 'date in mm/dd/yyyy')
 
-
-# if len(sys.argv) >1:
-#     date = sys.argv[1]
-# else:
-
-# def user_input():
-#     date = input('Enter a date between 1/1/1800 and 12/31/2199:    ')
-#     return(date)
+def user_input():
+    date = input('Enter a date between 1/1/1800 and 12/31/2199:    ')
+    return(date)
 
 def date_parser(date):
     pattern = re.compile('(\d{1,2})\/(\d{1,2})\/(\d{2}(\d{2}))')
@@ -39,10 +34,6 @@ def century(year):
     print('Anchor: ' + str(anchor))
     return(anchor)
 
-
-
-
-
         
 def year_(y, anchor):
     doomsday= (( y//12 + y%12 + (y%12)//4 ) % 7  + anchor )%7
@@ -63,7 +54,7 @@ def day_sub(month):
     l2 = [4,0,0,3,5,1,3,6,2,4,0,2]
     d = dict(zip(l1,l2))
     n = d[month]
-    print('month contibution: '+ str(n))
+    print('Month Contibution: '+ str(n))
     return(n)
 
 
@@ -75,12 +66,11 @@ def day_of_week(integer):
     return(codes[integer])
 
 def main():
-    # date = user_input()
-    date = sys.argv[1]
-    print(date)
+    if len(sys.argv) >1:
+        date = sys.argv[1]
+    else:
+        date = user_input()
     month, day, year, y = date_parser(date)
-    print('year is type:')
-    print(type(year))
     anchor = int(century(int(year)))
     doomsday = int(year_(int(y), int(anchor)))
     n = day_sub(int(month))
@@ -89,7 +79,7 @@ def main():
         if month ==2 or 1:  #just changed to 1 from 3
             total = total-1
     day_ = day_of_week(total)
-    print(day_)
+    print('Day of the Week for {} is {}'.format(date,day_))
 
 d='12/31/1986'
 d1='3/13/2017'
