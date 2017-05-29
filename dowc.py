@@ -1,18 +1,28 @@
-import re
+import argparse
+import sys
 from leap import isleap
+import re
 
-def user_input():
-    date = input('Enter a date between 1/1/1800 and 12/31/2199:    ')
-    return(date)
+parser = argparse.ArgumentParser(description= 'Pass in date in cmd line')
+parser.add_argument('-d', '--date', metavar='', type=str, help= 'date in mm/dd/yyyy')
+
+
+# if len(sys.argv) >1:
+#     date = sys.argv[1]
+# else:
+
+# def user_input():
+#     date = input('Enter a date between 1/1/1800 and 12/31/2199:    ')
+#     return(date)
 
 def date_parser(date):
     pattern = re.compile('(\d{1,2})\/(\d{1,2})\/(\d{2}(\d{2}))')
     string = date
     match=re.match(pattern,string)
-    month = match.group(1)
-    day = match.group(2)
-    year = match.group(3)
-    y = match.group(4)
+    month = int(match.group(1))
+    day = int(match.group(2))
+    year = int(match.group(3))
+    y = int(match.group(4))
     return(month, day, year, y)
 
 def century(year):
@@ -65,8 +75,12 @@ def day_of_week(integer):
     return(codes[integer])
 
 def main():
-    date = user_input()
+    # date = user_input()
+    date = sys.argv[1]
+    print(date)
     month, day, year, y = date_parser(date)
+    print('year is type:')
+    print(type(year))
     anchor = int(century(int(year)))
     doomsday = int(year_(int(y), int(anchor)))
     n = day_sub(int(month))
