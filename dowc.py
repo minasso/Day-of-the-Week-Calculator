@@ -2,7 +2,9 @@ import argparse
 import sys
 from calendar import isleap
 import re
+import gooey
 
+@Gooey 
 def argument_parser():
     parser = argparse.ArgumentParser(description= 'Pass in date in cmd line')
     parser.add_argument('-d', '--date', metavar='', type=str, help= 'date in mm/dd/yyyy')
@@ -72,11 +74,7 @@ def data_validation(month, day, year):
     
 def main():
     data_valid=False
-    i=0
-    while (data_valid==False) and (i<3):
-        i+=1
-        if i>5:
-            exit()
+    while data_valid==False:
         if len(sys.argv) >1:   
             args = argument_parser()  
             date = args.date  
@@ -85,8 +83,6 @@ def main():
         month, day, year, y = date_parser(date)
         print(month, day, year, y)
         data_valid=data_validation(month, day, year)
-
-
     anchor = int(century(int(year)))
     doomsday = int(year_(int(y), int(anchor)))
     n = day_sub(int(month))
