@@ -1,10 +1,7 @@
 import argparse
 import sys
 from calendar import isleap
-import re
-import gooey
 
-@Gooey 
 def argument_parser():
     parser = argparse.ArgumentParser(description= 'Pass in date in cmd line')
     parser.add_argument('-d', '--date', metavar='', type=str, help= 'date in mm/dd/yyyy')
@@ -16,22 +13,27 @@ def argument_parser():
 
 def user_input():
     date = input('Enter a date between 1/1/1800 and 12/31/2199 in MM/DD/YYYY form:    ')
-    return(date)
-
-#can get rid of re if i just split at /
+    return(date) 
 
 def date_parser(date):
-    pattern = re.compile('(\d{1,2})\/(\d{1,2})\/(\d{2}(\d{2}))')
-    string = date
-    match=re.match(pattern,string)
-    month = int(match.group(1))
-    day = int(match.group(2))
-    year = int(match.group(3))
-    y = int(match.group(4))
-    return(month, day, year, y)
+    month, day, year = date.split("/")
+    y = year[2:4]
+    return(int(month), int(day), int(year), int(y))
+
+def data_validation(month, day, year):
+    if month not in range(1,13):
+        print('Month must be between 01 and 12')
+        return(False)
+    elif day not in range(1,32):
+        print('Day must between 01 and 31')
+        return(False)
+    elif year not in range(1800,2200):
+        print('Year must be between 1800 and 2199')
+        return(False)
+    else:
+        return(True)
 
 def century(year):
-    
     if year<=1899 and year>=1800:
         anchor = 5
     elif year<=1999 and year>=1900:
@@ -58,19 +60,6 @@ def day_of_week(integer):
     zipper= zip(range(7), days)
     codes= dict(zipper)
     return(codes[integer])
-
-def data_validation(month, day, year):
-    if month not in range(1,13):
-        print('Month must be between 01 and 12')
-        return(False)
-    elif day not in range(1,32):
-        print('Day must between 01 and 31')
-        return(False)
-    elif year not in range(1800,2200):
-        print('Year must be between 1800 and 2199')
-        return(False)
-    else:
-        return(True)
     
 def main():
     data_valid=False
@@ -100,6 +89,8 @@ def main():
             print('Century Contribution = Anchor: ' + str(anchor))
             print('Year Contribution = Doomsday: ' +str(doomsday))
             print('Month Contibution: '+ str(n))
+            print('Day of the Week for {} is: {}'.format(date,day_))
+        else:
             print('Day of the Week for {} is: {}'.format(date,day_))
     else:
         print('Day of the Week for {} is: {}'.format(date,day_))
